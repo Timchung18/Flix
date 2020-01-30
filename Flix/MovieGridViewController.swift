@@ -25,8 +25,9 @@ class MovieGridViewController: UIViewController, UICollectionViewDataSource, UIC
         layout.minimumLineSpacing = 10
         layout.minimumInteritemSpacing = 10
         
-        let width = (view.frame.size.width - layout.minimumInteritemSpacing * 2) / 3
+        let width = (view.frame.size.width - layout.minimumInteritemSpacing * 2)/3
         layout.itemSize = CGSize(width: width, height: width * 1.5)
+        // fixed problem by clicking on "collection view flow layout" from drop down in main storyboard; click on the ruler icon (size inspector) in the inspector window; go to estimated size and choose the 'None' option
         
         let url = URL(string: "https://api.themoviedb.org/3/movie/297762/similar?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed")!
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
@@ -44,8 +45,6 @@ class MovieGridViewController: UIViewController, UICollectionViewDataSource, UIC
                 self.collectionView.reloadData()
             }
         }
-
-        // Do any additional setup after loading the view.
         task.resume()
     }
     

@@ -13,7 +13,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     
     
     @IBOutlet weak var tableView: UITableView!
-    var movies = [[String:Any]]()
+    var movies = [[String:Any]]() // the array of movies from the API results
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,6 +65,19 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         
         return cell
         // this loads each cell
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // get the new view controller(MovieDetailsVC) using segue.destination
+        let detailsViewController = segue.destination as! MovieDetailsViewController
+        // get the selected movie
+        let cell = sender as! UITableViewCell
+        let indexPath = tableView.indexPath(for: cell)!
+        let movie = movies[indexPath.row]
+        
+        // pass the selected object(movie) to the new view controller(MovieDetailsVC)
+        detailsViewController.movie = movie
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
 
